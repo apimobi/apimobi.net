@@ -1,11 +1,11 @@
 import { NextResponse, NextRequest } from "next/server";
-import Cors from "cors";
+// import Cors from "cors";
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-const cors = Cors({
-    methods: ["POST", "GET", "HEAD"],
-  });
+// const cors = Cors({
+//     methods: ["POST", "GET", "HEAD"],
+//   });
 
 // function runMiddleware(
 // req: NextApiRequest,
