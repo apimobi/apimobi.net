@@ -18,7 +18,7 @@ interface Data {
 const getData = async () => {
   "use server";
 
-  const res = await fetch(process.env.API_URL, {
+  const res = await fetch(`${process.env.API_URL}`, {
     headers: { 'jwtToken': "okidoki"}
   });
   return await res.json();
