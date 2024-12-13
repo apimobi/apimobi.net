@@ -34,7 +34,7 @@ const blues = [
   ["#1A334A", "#264F73", "#457AA6", "#A2BBD2", "#E3EBF2"]
 ];
 
-const getColor = (length, index) => {
+const getColor = (length: number, index: number) => {
   if (length <= blues.length) {
     return blues[length - 1][index];
   }
@@ -52,7 +52,7 @@ const data = [
   { name: "Nextjs", pv: 60 }
 ];
 
-const YAxisLeftTick = ({ y, payload: { value } }) => {
+const YAxisLeftTick = ({ y, payload: { value } }: { y: number, payload: { value: string } }) => {
   console.log('YAxisLeftTick', y, value);
   return (
     <Text x={0} y={y} textAnchor="start" verticalAnchor="middle" scaleToFit className="text-red-600 bg-indigo-500 w-80">
@@ -61,15 +61,18 @@ const YAxisLeftTick = ({ y, payload: { value } }) => {
   );
 };
 
-let ctx;
+let ctx: CanvasRenderingContext2D | null;
 
-const measureText14HelveticaNeue = (text) => {
+const measureText14HelveticaNeue = (text:string) => {
   if (!ctx) {
     ctx = document.createElement("canvas").getContext("2d");
-    ctx.font = "14px 'Helvetica Neue";
+    
   }
 
-  return ctx.measureText(text).width;
+  if (ctx) {
+    ctx.font = "14px 'Helvetica Neue";
+    return ctx.measureText(text).width;
+  }
 };
 
 const BAR_AXIS_SPACE = 10;
@@ -84,7 +87,7 @@ export default function SkillBarChart() {
     () =>
       data.reduce((acc, cur) => {
         const value = cur[yKey];
-        const width = measureText14HelveticaNeue(value.toLocaleString());
+        const width = measureText14HelveticaNeue(value.toLocaleString()) || 0;
         if (width > acc) {
           return width;
         }
