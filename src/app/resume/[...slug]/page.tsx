@@ -4,8 +4,9 @@ import Experience from "@/components/experience";
 import Recommendation from "@/components/recommendation";
 import SectionTitle from "@/components/sectionTitle";
 // import SkillRadarChart from "@/components/SkillRadarChart";
-// import SkillBarChart from "@/components/SkillBarChart";
+import SkillBarChart from "@/components/SkillBarChart";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { notFound } from "next/navigation";
 
 
 interface Data {
@@ -15,11 +16,11 @@ interface Data {
   education: []
 }
 
-const getData = async () => {
+const getData = async (profile:string) => {
   "use server";
 
-  const res = await fetch(`${process.env.API_URL}`, {
-    headers: { 'jwtToken': "okidoki"}
+  const res = await fetch(`${process.env.API_URL}?${profile}`, {
+    headers: { 'jwtToken': `${process.env.TOKEN}`}
   });
   return await res.json();
 };
@@ -31,8 +32,12 @@ export default async function Resume(
   }) {
 
   const slug = (await params).slug;
+  const avatar = `/${slug[1]}_64.jpg`
+  if(slug.length < 2) return notFound();
+  const path  = `${slug[0]}/${slug[1]}`;
+  if(path !== process.env.RESUME_0 && path !== process.env.RESUME_1) return notFound();
   
-  const data: Data = await getData();
+  const data: Data = await getData(slug[0]);
 
 
   return (
@@ -42,8 +47,8 @@ export default async function Resume(
         <div className="w-full flex flex-col p-4 md:p-5 print:p-16">
           <div className="w-full hidden sm:flex print:flex justify-between items-center">
             <div className="flex-1 flex pr-5">
-              <Avatar >
-                <AvatarImage src="/avatar.jpg" />
+              <Avatar className="min-w-20 min-h-20">
+                <AvatarImage src={avatar} />
                 <AvatarFallback>VM</AvatarFallback>
               </Avatar>
               <h2 className="flex-1 text-4xl font-[1000] pl-10">{slug[0]} {slug[1]}</h2>
@@ -76,7 +81,7 @@ export default async function Resume(
 
               <SectionTitle  str="Skills"/>
 
-              {/* <SkillBarChart /> */}
+              <SkillBarChart />
               
 
             </div>
