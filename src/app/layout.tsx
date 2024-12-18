@@ -39,7 +39,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${inter.variable} ${roboto_mono.variable} antialiased bg-white `}>
+      <body className={`${inter.variable} ${roboto_mono.variable} 
+      antialiased bg-white justify-center`}>
         {children}
       </body>
     </html>
