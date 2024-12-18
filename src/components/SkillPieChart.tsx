@@ -4,13 +4,13 @@
 import { PieChart, Pie, Cell } from 'recharts';
 import { ChartContainer, ChartConfig } from "@/components/ui/chart"
 
-const data = [
-    { name: 'php', value: 9 },
-    { name: 'python', value: 6 },
-    { name: 'javascript', value: 6 },
-    { name: 'react', value: 5 },
-    { name: 'next', value: 5 },
-  ];
+// const data = [
+//     { name: 'php', value: 9 },
+//     { name: 'python', value: 6 },
+//     { name: 'javascript', value: 6 },
+//     { name: 'react', value: 5 },
+//     { name: 'next', value: 5 },
+//   ];
 
   const chartConfig = {
     desktop: {
@@ -38,12 +38,21 @@ return (
 );
 };
 
-export default function SkillPieChart() {
+interface SkillProps {
+  skills: Array<data>
+}
+
+type data = {
+    name: string,
+    value: number
+}
+
+export default function SkillPieChart({skills}: SkillProps) {
     return (
         <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
             <PieChart width={50} height={50}>
                 <Pie
-                    data={data}
+                    data={skills}
                     cx="50%"
                     cy="50%"
                     labelLine={false}
@@ -52,7 +61,7 @@ export default function SkillPieChart() {
                     fill="#8884d8"
                     dataKey="value"
                 >
-                    {data.map((entry, index) => (
+                    {skills.map((value: data, index: number) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>

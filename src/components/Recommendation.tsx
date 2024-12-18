@@ -19,7 +19,10 @@ export default function Recommendation({ id, data }: RecommendationProps) {
             <div>{data.name}</div>
             <Badge variant="outline">{data.role}</Badge>
             <div>
-                <p>{data.message}</p>
+                <p>
+                    {data.message.substring(0, 100)} 
+                    {data.message.length >= 100 && '...'}
+                </p>
             </div>
         </div>
     );

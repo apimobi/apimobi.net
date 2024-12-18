@@ -6,9 +6,9 @@
 /* Fonts */
 
 /* Family */
-h1 { 
+/* h1 { 
     font-family: 'Julius Sans One', sans-serif;
-  }
+  } */
   
   h2 { /* Contact, Skills, Education, About me, Work Experience */
     font-family: 'Archivo Narrow', sans-serif;
@@ -55,14 +55,14 @@ h1 {
   /* End Colors */
   
   /* Sizes */
-  h1 { 
+  /* h1 { 
     font-weight: 300; 
-    font-size: 1.2cm;
+    font-size: 18px;
     transform:scale(1,1.15); 
     margin-bottom: 0.2cm;
     margin-top: 0.2cm;
     text-transform: uppercase; 
-  }
+  } */
   
   h2 {
     margin-top: 0.1cm;

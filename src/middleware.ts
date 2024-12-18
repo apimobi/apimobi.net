@@ -22,6 +22,6 @@ export function middleware(request: NextRequest) {
 }
  
 // See "Matching Paths" below to learn more
-export const config = {
-  matcher: '/resume/:lastname/:firstname',
-}
+// export const config = {
+//   matcher: '/resume/:lastname/:firstname',
+// }
