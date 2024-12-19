@@ -17,6 +17,8 @@ interface Data {
   education: []
 }
 
+let fetchTry = 0;
+
 const getData = async (profile: string) => {
   // "use server";
   // TODO cache data
@@ -27,9 +29,10 @@ const getData = async (profile: string) => {
   });
 
   try {
+    fetchTry ++;
     return await res.json();
   } catch (e) {
-    console.log('error', e);
+    if(fetchTry < 2) return getData(profile);
   }
 
   return {
