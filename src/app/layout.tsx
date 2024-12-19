@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import Roboto from "./fonts/roboto";
 import { Inter, Roboto_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+
  
 const inter = Inter({
   subsets: ['latin'],
@@ -42,6 +46,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${roboto_mono.variable} 
       antialiased bg-white justify-center`}>
         {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
