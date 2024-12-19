@@ -25,7 +25,20 @@ const getData = async (profile: string) => {
   const res = await fetch(`${process.env.API_URL}?profile=${profile}`, {
     headers: { 'jwtToken': `${process.env.TOKEN}` }
   });
-  return await res.json();
+
+  try {
+    return await res.json();
+  } catch (e) {
+    console.log('error', e);
+  }
+
+  return {
+    skills: [],
+    recommendations: [],
+    experiences: [],
+    interests: [],
+    education: []
+  }
 };
 
 
