@@ -25,23 +25,11 @@ const getData = async (profile: string) => {
   console.log("----------------------");
   console.log(`${process.env.API_URL}?profile=${profile}`);
   const res = await fetch(`${process.env.API_URL}?profile=${profile}`, {
-    headers: { 'jwtToken': `${process.env.TOKEN}` }
+    headers: { 'jwtToken': `${process.env.TOKEN}` },
+    next: { revalidate: 3600 }
   });
 
-  try {
-    fetchTry ++;
-    return await res.json();
-  } catch (e) {
-    if(fetchTry < 2) return getData(profile);
-  }
-
-  return {
-    skills: [],
-    recommendations: [],
-    experiences: [],
-    interests: [],
-    education: []
-  }
+  return await res.json();
 };
 
 
